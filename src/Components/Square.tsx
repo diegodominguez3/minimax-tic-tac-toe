@@ -1,15 +1,17 @@
-import React from 'react';
-import './Square.css'
+import React from 'react'; 
+import {SquareValue} from './Game'; 
 
-interface SquareProps {value: string}; 
+interface SquareProps {
+    value: SquareValue;
+    onClick(): void; 
+}
 
-class Square extends React.Component<SquareProps, {}> {
-    render() {
-        return (
-        <div className="Square" style={{width: 'calc(100%/3)'}}>
-            <div style={{textAlign: 'center'}}>{this.props.value}</div>
-        </div>); 
-    }
+const Square: React.FC<SquareProps> = props => {
+    return (
+        <div className="square" onClick={props.onClick}>
+            {props.value}
+        </div>
+    ); 
 }
 
 export default Square; 

@@ -1,54 +1,41 @@
-import React from 'react'; 
-import _uniqueId from 'lodash/uniqueId'; 
+import React, {ReactNode} from 'react'; 
 import Square from './Square'; 
-import './Board.css'; 
+import {SquareValue} from './Game'; 
 
 interface BoardProps {
-    board: string[][],
-    turn: string;
+    onClick: (i: number) => void; 
+    squares: SquareValue[];
 }
 
-class Board extends React.Component<{}, BoardProps> {
-    initialState = {
-        board: [['','',''],
-                ['','',''],
-                ['','','']],
-        turn: 'x'
-    };
-
-    constructor(props: any, SquareValue: string) {
-       super(props); 
-       this.state = {...this.initialState};
-       this.renderBoard = this.renderBoard.bind(this); 
+const Board: React.FC<BoardProps> = props => {
+    const renderSquare = (i:number): ReactNode => {
+        return (
+            <Square
+                value = {props.squares[i]}
+                onClick = {() => props.onClick(i)}
+            />
+        );
     }
 
-    renderBoard() {
-        const board = this.state.board;
-        return (
-            board.map(row => {
-                return (
-                    <div className="row" key={_uniqueId('')}>
-                        {
-                            row.map(squareVal => {
-                                return (
-                                    <Square value={squareVal} key={_uniqueId('')}/>
-                                )
-                            })
-                        }
-                    </div>
-                )
-            })
-        )
-    }
-
-    render() {
-        console.log(this.state); 
-        return (
-            <div className="Board">
-                {this.renderBoard()}
+    return (
+        <div className="container" style={{marginBottom: '20px'}}>
+            <div className="board-row">
+                {renderSquare(0)}
+                {renderSquare(1)}
+                {renderSquare(2)}
             </div>
-        )
-    }
+            <div className="board-row">
+                {renderSquare(3)}
+                {renderSquare(4)}
+                {renderSquare(5)}
+            </div>
+            <div className="board-row">
+                {renderSquare(6)}
+                {renderSquare(7)}
+                {renderSquare(8)}
+            </div>
+        </div>
+    )
 }
 
 export default Board; 

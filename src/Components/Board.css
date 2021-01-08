@@ -1,9 +1,0 @@
-.Board {
-    max-width: 768px; 
-    margin: 0 auto; 
-}
-
-.Board.row {
-    display: flex;
-    width: 100%; 
-}
